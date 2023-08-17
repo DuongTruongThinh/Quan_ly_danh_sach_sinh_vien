@@ -7,6 +7,7 @@ if (jsonData != null) {
       item.ma,
       item.ten,
       item.email,
+      item.matKhau,
       item.diemToan,
       item.diemLy,
       item.diemHoa
@@ -17,6 +18,16 @@ if (jsonData != null) {
 
 function themSv() {
   var sv = layThongTinTuForm();
+  // start validate
+  var isValid =
+    kiemTraRong("spanTenSV", sv.ten) &
+    kiemTraDoDai(2, 30, "spanTenSV", sv.ten) &
+    kiemTraDoDai(2, 30, "spanMatKhau", sv.matKhau) &
+    kiemTraEmail("spanEmailSV", sv.email);
+  // end validate
+  if (!isValid) {
+    return;
+  }
   dssv.push(sv);
   var jsonData = JSON.stringify(dssv);
   localStorage.setItem("DSSV", jsonData);
